@@ -1,34 +1,51 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-
+import { NavLink, Route } from 'react-router-dom'
+import About from './pages/About'
+import Home from './pages/Home'
+import Header from './components/Header'
 export default class App extends Component {
-  getStudentData = () => {
-    axios.get('http://localhost:3000/api1/students').then(
-      (response) => {
-        console.log('成功了', response.data)
-      },
-      (error) => {
-        console.log('失败了', error)
-      }
-    )
-  }
-
-  getCarsData = () => {
-    axios.get('http://localhost:3000/api2/cars').then(
-      (response) => {
-        console.log('成功了', response.data)
-      },
-      (error) => {
-        console.log('失败了', error)
-      }
-    )
-  }
-
   render() {
     return (
       <div>
-        <button onClick={this.getStudentData}>点我死妈</button>
-        <button onClick={this.getCarsData}>点我自爆</button>
+        <div className="row">
+          <div className="col-xs-offset-2 col-xs-8">
+            <Header />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-2 col-xs-offset-2">
+            <div className="list-group">
+              {/* <a className="list-group-item active" href="./about.html">
+                About
+              </a>
+              <a className="list-group-item" href="./home.html">
+                Home
+              </a> */}
+              <NavLink
+                activeClassName="demo"
+                className="list-group-item"
+                to="/about"
+              >
+                About
+              </NavLink>
+              <NavLink
+                activeClassName="demo"
+                className="list-group-item"
+                to="/home"
+              >
+                Home
+              </NavLink>
+            </div>
+          </div>
+          <div className="col-xs-6">
+            <div className="panel">
+              <div className="panel-body">
+                <Route path="/about" component={About} />
+                <Route path="/home" component={Home} />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
